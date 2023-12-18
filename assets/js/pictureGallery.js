@@ -56,7 +56,6 @@ const imageGalleryData = [
     }
 ];
 
-
 function generateGallery() {
     var galleryContainer = document.querySelector("#gallery-row");
     var screenWidth = window.innerWidth;

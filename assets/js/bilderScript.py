@@ -1,20 +1,3 @@
-# import os as o
-# import sys
-
-# def load(directory): 
-#     imgs = o.listdir(f"../img/{directory}")
-#     fmt = ""
-#     for img in imgs:
-#         fmt += "\t{\n\t\tsrc:\"assets/img/"+directory+"/"+img+"\"\n\t},\n"
-#     return fmt[:-2]
-
-# def Json(constName, directory):
-#     file = open("file.js", "a+")
-#     file.write(f"\nconst {constName} = [\n{load(directory)}\n];")
-#     file.close()
-
-# Json(sys.argv[1], sys.argv[2])
-
 import os as o
 import sys
 

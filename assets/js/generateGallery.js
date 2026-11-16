@@ -3,40 +3,53 @@ function generateGallery(images) {
     ".row.gy-4.justify-content-center"
   );
 
-  for (var i = 0; i < images.length; i++) {
-    var imageInfo = images[i];
+  if (!galleryContainer) return;
+
+  images.forEach(function (imageInfo) {
     var galleryItem = document.createElement("div");
     galleryItem.className = "col-xl-3 col-lg-4 col-md-6 gallery-item";
-    galleryItem.innerHTML = `
-        <div class="gallery-item h-100">
-          <a href="${imageInfo.src}" class="glightbox" data-alt="${imageInfo.alt}">
-            <img src="${imageInfo.src}" class="img-fluid" alt="${imageInfo.alt}">
-          </a>
-        </div>
-      `;
-    galleryContainer.appendChild(galleryItem);
-  }
 
-  const lightbox = GLightbox({
-    selector: ".glightbox",
-    touchNavigation: true,
-    keyboardNavigation: true,
-    closeButton: false,
+    var imageWrapper = document.createElement("div");
+    imageWrapper.className = "gallery-item h-100";
+
+    var link = document.createElement("a");
+    link.href = imageInfo.src;
+    link.className = "glightbox";
+
+    var image = document.createElement("img");
+    image.src = imageInfo.src;
+    image.className = "img-fluid";
+    image.alt = imageInfo.alt || "";
+    link.dataset.alt = image.alt;
+
+    link.appendChild(image);
+    imageWrapper.appendChild(link);
+    galleryItem.appendChild(imageWrapper);
+    galleryContainer.appendChild(galleryItem);
   });
+
+  if (images.length && window.GLightbox) {
+    GLightbox({
+      selector: ".glightbox",
+      touchNavigation: true,
+      keyboardNavigation: true,
+      closeButton: false,
+    });
+  }
 }
 
 function loadNatureImages() {
-  window.addEventListener("load", generateGallery(nature));
+  generateGallery(nature);
 }
 function loadArchitectureImages() {
-  window.addEventListener("load", generateGallery(architecture));
+  generateGallery(architecture);
 }
 function loadSportImages() {
-  window.addEventListener("load", generateGallery(sport));
+  generateGallery(sport);
 }
 function loadTravelImages() {
-  window.addEventListener("load", generateGallery(travel));
+  generateGallery(travel);
 }
 function loadAnimalImages() {
-  window.addEventListener("load", generateGallery(animal));
+  generateGallery(animal);
 }
